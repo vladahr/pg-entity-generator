@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PgEntityGenerator", "PgEntityGenerator\PgEntityGenerator.csproj", "{49DF422F-2BB4-4BAC-9E4B-7E2D991C9482}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49DF422F-2BB4-4BAC-9E4B-7E2D991C9482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49DF422F-2BB4-4BAC-9E4B-7E2D991C9482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49DF422F-2BB4-4BAC-9E4B-7E2D991C9482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49DF422F-2BB4-4BAC-9E4B-7E2D991C9482}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F443A02-2C6F-4858-89E2-22795DE2B122}
+	EndGlobalSection
+EndGlobal
