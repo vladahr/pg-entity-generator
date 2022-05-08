@@ -55,7 +55,22 @@ namespace PgEntityGenerator
             foreach (var column in tableInfo.Columns)
             {
                 var propName = column.Name.ToPascalCase();
-                builder.AppendLine($"\t\tMap(x => x.{propName}, \"{column.Name}\");");
+
+                if (column.IsPrimaryKey)
+                {
+                    var idSuffix = string.Empty;
+                    if (!string.IsNullOrWhiteSpace(column.DefaultValue) &&
+                        column.DefaultValue.TryParseSequence(out var sequence)) 
+                    {
+                        idSuffix = $".GeneratedBy.Sequence(\"{sequence}\")";
+                    }
+
+                    builder.AppendLine($"\t\tId(x => x.{propName}){idSuffix};");
+                }
+                else
+                {
+                    builder.AppendLine($"\t\tMap(x => x.{propName}, \"{column.Name}\");");
+                }
             }
             builder.AppendLine("\t}");
             builder.AppendLine("}");
