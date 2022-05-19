@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using PgEntityGenerator;
-using NodaTime;
 using System.Diagnostics;
 
 var dt = DateTimeZoneProviders.Tzdb["Europe/Tallinn"].AtLeniently(LocalDateTime.FromDateTime(DateTime.Now));
