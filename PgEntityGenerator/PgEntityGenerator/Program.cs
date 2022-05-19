@@ -2,8 +2,6 @@
 using PgEntityGenerator;
 using System.Diagnostics;
 
-var dt = DateTimeZoneProviders.Tzdb["Europe/Tallinn"].AtLeniently(LocalDateTime.FromDateTime(DateTime.Now));
-var t = dt.Zone.Id;
 if (args == default || args.Length < 3)
 {
     Console.WriteLine($"Invalid call arguments, specify schema table connectionString");
