@@ -36,8 +36,8 @@ namespace PgEntityGenerator
               INNER JOIN information_schema.columns c 
 			  	ON c.table_name = t.table_name AND c.table_schema = t.table_schema
               WHERE
-                t.table_schema = @t_schema AND
-                t.table_name = @t_name";
+                t.table_schema ilike @t_schema AND
+                t.table_name ilike  @t_name";
 
             if (connection.State != System.Data.ConnectionState.Open)
             {

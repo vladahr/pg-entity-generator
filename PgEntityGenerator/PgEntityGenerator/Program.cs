@@ -1,20 +1,21 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using PgEntityGenerator;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 if (args == default || args.Length < 3)
 {
     Console.WriteLine($"Invalid call arguments, specify schema table connectionString");
     Console.WriteLine($"Example run is powershell:");
-    Console.WriteLine(".\\PgEntityGenerator.exe \"tschema\" \"table\" \"Server=localhost;Port=5432;Database=test;User ID=postgres;Password=****;CommandTimeout=300;\"");
+    Console.WriteLine(".\\PgEntityGenerator.exe \"Server=localhost;Port=5432;Database=test;User ID=postgres;Password=****;CommandTimeout=300;\" \"tschema\" \"table\"");
 
     Console.ReadKey();
     Environment.Exit(-1);
 }
 
-var schema = args[0];
-var table = args[1];
-var connectionString = string.Join(' ', args[2..]);
+var connectionString = args[0];
+var schema = args[1].ToLowerInvariant();
+var table = args[2].ToLowerInvariant();
 
 await using var tableInfoRetreiver = new PostgreTableInfoRetriever(connectionString);
 var info = await tableInfoRetreiver.GetTableInfoAsync(schema, table);
@@ -33,9 +34,11 @@ await Task.WhenAll(
     File.WriteAllTextAsync(classMapPath, classMapFeature.Content)
 );
 
-
-Process.Start(classPath);
-Process.Start(classMapPath);
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+{
+    Process.Start("notepad.exe", classPath);
+    Process.Start("notepad.exe", classMapPath);
+}
 
 Console.WriteLine($"Task completed, exit in 5s.");
 Thread.Sleep(5000);
