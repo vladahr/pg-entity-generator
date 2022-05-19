@@ -1,6 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using PgEntityGenerator;
+using NodaTime;
+using System.Diagnostics;
 
+var dt = DateTimeZoneProviders.Tzdb["Europe/Tallinn"].AtLeniently(LocalDateTime.FromDateTime(DateTime.Now));
+var t = dt.Zone.Id;
 if (args == default || args.Length < 3)
 {
     Console.WriteLine($"Invalid call arguments, specify schema table connectionString");
@@ -24,10 +28,17 @@ var classMapFeature = NetClassBuilder.GetMapClass(info);
 
 Console.WriteLine($"Creating files {classFeature.FileName}, {classMapFeature.FileName}");
 
+var classPath = Path.GetFullPath($"./{classFeature.FileName}");
+var classMapPath = Path.GetFullPath($"./{classMapFeature.FileName}");
+
 await Task.WhenAll(
-    File.WriteAllTextAsync($"./{classFeature.FileName}", classFeature.Content),
-    File.WriteAllTextAsync($"./{classMapFeature.FileName}", classMapFeature.Content)
+    File.WriteAllTextAsync(classPath, classFeature.Content),
+    File.WriteAllTextAsync(classMapPath, classMapFeature.Content)
 );
+
+
+Process.Start(classPath);
+Process.Start(classMapPath);
 
 Console.WriteLine($"Task completed, exit in 5s.");
 Thread.Sleep(5000);

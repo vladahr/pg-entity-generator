@@ -27,10 +27,8 @@ namespace PgEntityGenerator
 						JOIN information_schema.key_column_usage kcu 
      					ON kcu.constraint_name = tco.constraint_name
      					AND kcu.constraint_schema = tco.constraint_schema
-     					AND kcu.constraint_name = tco.constraint_name
 						WHERE tco.constraint_type = 'PRIMARY KEY' 
 						AND kcu.table_name = t.table_name 
-						AND kcu.table_schema = t.table_schema
 						AND kcu.table_schema = t.table_schema
 						AND kcu.column_name = c.column_name
 					)) as is_primary_key
